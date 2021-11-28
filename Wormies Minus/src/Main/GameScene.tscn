@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/petriFinalRed.png" type="Texture" id=1]
+[ext_resource path="res://Assets/bensound-funkysuspense.ogg" type="AudioStream" id=2]
+[ext_resource path="res://src/Main/GameScene.gd" type="Script" id=3]
+[ext_resource path="res://src/Actors/PlayerController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Objects/GrowthCanister.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Actors/PlayerFull.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/pictureLightMask_thumb.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 297.76
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 222.768
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 30.9899
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource( 3 )
+PlayerScene = ExtResource( 6 )
+CanisterScene = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -50, -50 )
+scale = Vector2( 2.25, 2.25 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="PlayArea" type="Area2D" parent="."]
+collision_layer = 512
+
+[node name="PlayAreaCollision" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2( 407.092, 379.952 )
+shape = SubResource( 1 )
+
+[node name="SpawnArea" type="Area2D" parent="."]
+
+[node name="SpawnAreaCollision" type="CollisionShape2D" parent="SpawnArea"]
+position = Vector2( 407.092, 379.952 )
+shape = SubResource( 2 )
+
+[node name="PlayerController" parent="." instance=ExtResource( 4 )]
+
+[node name="GrowthCanister" parent="." instance=ExtResource( 5 )]
+position = Vector2( 407.092, 228.879 )
+
+[node name="SpawnLocation" type="Node2D" parent="."]
+position = Vector2( 407.092, 379.952 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="SpawnLantern" type="Light2D" parent="."]
+position = Vector2( 469.33, 435.457 )
+texture = ExtResource( 7 )
+texture_scale = 0.6
+energy = 0.45
+
+[node name="SpawnPrevention" type="Area2D" parent="SpawnLantern"]
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnLantern/SpawnPrevention"]
+shape = SubResource( 3 )
+
+[node name="SpawnLanternTimer" type="Timer" parent="."]
+wait_time = 7.5
+autostart = true
+
+[node name="SpawnAiTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="LevelBoundsHazard" type="Area2D" parent="." groups=[
+"hazard",
+]]
+collision_layer = 1024
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelBoundsHazard"]
+polygon = PoolVector2Array( 25.3598, 22.6148, 781.648, 22.6148, 776.737, 733.477, 4.48816, 765.398, 20.4488, 37.3476, 197.243, 161.349, 106.391, 295.173, 114.985, 514.939, 246.353, 643.851, 424.375, 690.506, 613.448, 619.297, 706.756, 426.541, 683.429, 255.885, 579.071, 136.795, 388.771, 88.9127, 214.432, 139.25, 186.194, 151.527 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="SpawnLantern/SpawnPrevention" to="." method="_on_SpawnPrevention_area_entered"]
+[connection signal="area_exited" from="SpawnLantern/SpawnPrevention" to="." method="_on_SpawnPrevention_area_exited"]
+[connection signal="timeout" from="SpawnLanternTimer" to="." method="_on_SpawnLanternTimer_timeout"]
+[connection signal="timeout" from="SpawnAiTimer" to="." method="_on_SpawnAiTimer_timeout"]

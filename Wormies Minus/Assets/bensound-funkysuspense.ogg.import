@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bensound-funkysuspense.ogg-551eb761b3e62bf504ddebb3684c37fe.oggstr"
+
+[deps]
+
+source_file="res://Assets/bensound-funkysuspense.ogg"
+dest_files=[ "res://.import/bensound-funkysuspense.ogg-551eb761b3e62bf504ddebb3684c37fe.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
