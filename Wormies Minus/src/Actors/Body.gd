@@ -27,6 +27,7 @@ func _ready():
 
 func _physics_process(delta):
 	var direction = ((followBody.get_global_position()) - self.get_global_position()).normalized()
+	look_at(followBody.get_global_position())
 #	rotation = followBody.rotation
 #	var motion = direction * speed * delta
 #	position += motion

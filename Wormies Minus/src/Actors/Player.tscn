@@ -84,6 +84,10 @@ stream = ExtResource( 6 )
 
 [node name="BirthRand1Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+
+[node name="BodySpawn" type="Position2D" parent="."]
+position = Vector2( -15, 0 )
+
 [connection signal="area_entered" from="AIDetection" to="." method="_on_AIDetection_area_entered"]
 [connection signal="area_exited" from="AIDetection" to="." method="_on_AIDetection_area_exited"]
 [connection signal="body_entered" from="DieSpot" to="." method="_on_DieSpot_body_entered"]

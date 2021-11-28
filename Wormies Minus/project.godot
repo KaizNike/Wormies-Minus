@@ -16,13 +16,14 @@ _global_script_class_icons={
 
 config/name="Wormies Minus"
 config/description="Personal Game Jam Game"
-run/main_scene="res://src/Main/GameScene.tscn"
+run/main_scene="res://src/Main/Main.tscn"
 config/icon="res://Assets/Wormies Minus Icon.png"
 
 [autoload]
 
 PlayerData="*res://src/Autoload/PlayerData.tscn"
 SoundsInd="*res://src/Autoload/SoundsInd.tscn"
+Globals="*res://src/Scripts/Globals.gd"
 
 [display]
 

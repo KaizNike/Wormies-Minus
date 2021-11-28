@@ -82,6 +82,7 @@ polygon = PoolVector2Array( 25.3598, 22.6148, 781.648, 22.6148, 776.737, 733.477
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="SpawnLantern/SpawnPrevention" to="." method="_on_SpawnPrevention_area_entered"]
 [connection signal="area_exited" from="SpawnLantern/SpawnPrevention" to="." method="_on_SpawnPrevention_area_exited"]

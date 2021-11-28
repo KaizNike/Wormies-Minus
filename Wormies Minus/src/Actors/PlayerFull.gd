@@ -47,6 +47,13 @@ func _ready():
 
 func die():
 	SoundsInd.get_node("Death").play()
+	var children = self.get_children()
+	var index = 0
+	for child in children:
+		if child.is_in_group("body"):
+			if index % 2 == 0:
+				Globals.emit_signal("death_canister", child.global_position)
+		index += 1
 	queue_free()
 #	self.visible = false;
 #	timer.start()
@@ -59,7 +66,8 @@ func grow():
 	scene_instance.color = color
 	scene_instance.followBody = followBodyFull.get_node("BodyLock")
 #	scene_instance.global_position = followBodyFull.get_node("BodyLock").global_position
-	scene_instance.position = followBodyFull.get_node("BodyLock").position
+#	scene_instance.position = followBodyFull.get_node("BodyLock").position
+	scene_instance.position = followBodyFull.get_node("BodySpawn").position
 #	scene_instance.global_position = Vector2(OS.window_size.x/2, OS.window_size.y/2)
 #	scene_instance.position = Vector2(PlayerNode.position.x + distance, PlayerNode.position.y) 
 #	distance += 20

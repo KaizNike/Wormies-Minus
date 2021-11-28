@@ -16,6 +16,7 @@ var first = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Globals.connect("death_canister",self,"spawn_canister")
 #	print(OS.window_size)
 	pass # Replace with function body.
 
@@ -39,6 +40,8 @@ func _input(event: InputEvent) -> void:
 		if first == false:
 			first = true
 			$AudioStreamPlayer.play()
+			get_parent().get_node("UI").visible = false
+#			$Control.visible = false
 			scene_instance.first = true
 		playersNum += 1
 #		scene_instance.position = OS.get_window_size() / 2
