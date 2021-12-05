@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/feedingtime.wav-5de60e99d7b1519c9f8bd149a7dde2e4.sample"
+
+[deps]
+
+source_file="res://Assets/feedingtime.wav"
+dest_files=[ "res://.import/feedingtime.wav-5de60e99d7b1519c9f8bd149a7dde2e4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

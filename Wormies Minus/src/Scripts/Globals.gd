@@ -1,6 +1,7 @@
 extends Node
 
 signal death_canister(pos)
+signal detect_death()
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

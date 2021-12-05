@@ -9,6 +9,7 @@ var button
 var color = Color()
 var ai_controlled = false
 var last_hazard
+var next_door_neighbor
 
 export (PackedScene) var BodyScene; var links = []; var links_img = []
 var pos_start = Vector2(0, 0); var size_body_link = 5; var num_links = 10; var dt = 15
@@ -114,7 +115,9 @@ func _timer_callback():
 
 
 func _on_DieSpot_body_entered(body):
-	if body.is_in_group("body") and button != body.id:
+#	if body.is_in_group("body") and button != body.id:
+#		natural_death()
+	if body.is_in_group("body") and body != next_door_neighbor:
 		natural_death()
 	pass # Replace with function body.
 

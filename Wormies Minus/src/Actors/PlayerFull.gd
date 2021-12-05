@@ -54,6 +54,7 @@ func die():
 			if index % 2 == 0:
 				Globals.emit_signal("death_canister", child.global_position)
 		index += 1
+	Globals.emit_signal("detect_death")
 	queue_free()
 #	self.visible = false;
 #	timer.start()
@@ -64,7 +65,9 @@ func grow():
 	var scene_instance = BodyScene.instance()
 	scene_instance.id = button
 	scene_instance.color = color
-	scene_instance.followBody = followBodyFull.get_node("BodyLock")
+	scene_instance.followBody = followBodyFull.get_node("BodySpawn")
+	if scene_instance.followBody == $Player:
+		$Player.next_door_neighbor = scene_instance
 #	scene_instance.global_transform = followBodyFull.get_node("BodySpawn").global_transform
 	scene_instance.position = followBodyFull.position
 #	scene_instance.position = followBodyFull.get_node("BodyLock").position

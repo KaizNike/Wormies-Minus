@@ -1,5 +1,6 @@
 extends Node2D
 
+var Event = "none"
 var players = []
 var ais = []
 var playersNum = 0
@@ -17,6 +18,7 @@ var first = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Globals.connect("death_canister",self,"spawn_canister")
+	Globals.connect("detect_death",self,"wormy_died")
 #	print(OS.window_size)
 	pass # Replace with function body.
 
@@ -39,6 +41,7 @@ func _input(event: InputEvent) -> void:
 		var scene_instance = PlayerScene.instance()
 		if first == false:
 			first = true
+			get_parent().game_start()
 			$AudioStreamPlayer.play()
 			get_parent().get_node("UI").visible = false
 #			$Control.visible = false
@@ -64,31 +67,6 @@ func spawn_canister(pos:Vector2):
 	
 func remove_canister():
 	canistersNum -= 1
-
-
-func _on_Timer_timeout():
-	placed = false
-	if placed == false:
-		if canistersNum < 64:
-#			
-#			placed = true
-			var point = Vector2(rand_range(0,OS.window_size.x),
-			rand_range(0,OS.window_size.y))
-	#		point = Vector2(400,220)
-			var space_state = get_world_2d().direct_space_state
-			var result = space_state.intersect_point(point, 2, [], 1, true, true)
-	#		print(result)
-			for part in result:
-				if part.collider == $SpawnArea:
-					print("PUSH")
-					spawn_canister(point)
-					print(canistersNum)
-					placed = true
-		else:
-			print("FULL!")
-#			print(point)
-#		placed = false
-	pass # Replace with function body.
 
 
 func change_spawn_loc():
@@ -140,7 +118,9 @@ func spawn_rand(scene):
 
 func spawn_ai():
 	if spawner_disabled:
-			return
+		return
+	if playersNum > 48:
+		return
 			
 	var finished = false
 	var AIid = 0
@@ -162,3 +142,59 @@ func spawn_ai():
 	$PlayArea.connect("body_exited", scene_instance, "_on_PlayArea_body_exited")
 	add_child(scene_instance)
 	spawn_rand(scene_instance)
+	
+func breeding_frenzy(duration, event):
+	$SpawnAiTimer.stop()
+	$SpawnAiTimer.wait_time = 0.2
+	$SpawnAiTimer.start()
+	Event = event
+	$EventDuration.wait_time = duration
+	$EventDuration.start()
+#	yield(get_tree().create_timer(duration),"timeout")
+#	$SpawnAiTimer.wait_time = 15
+
+func feeding_time(duration, event):
+	$GrowthCanTimer.stop()
+	$GrowthCanTimer.wait_time = 0.01
+	$GrowthCanTimer.start()
+	Event = event
+	$EventDuration.wait_time = duration
+	$EventDuration.start()
+
+func _on_EventDuration_timeout():
+	if Event == "breedingfrenzy":
+		$SpawnAiTimer.stop()
+		$SpawnAiTimer.wait_time = 15
+		$SpawnAiTimer.start()
+	elif Event == "feedingtime":
+		$GrowthCanTimer.stop()
+		$GrowthCanTimer.wait_time = 7.5
+		$GrowthCanTimer.start()
+	pass # Replace with function body.
+
+
+func _on_GrowthCanTimer_timeout():	
+	placed = false
+	if placed == false:
+		if canistersNum < 64:
+#			placed = true
+			var point = Vector2(rand_range(0,OS.window_size.x),
+			rand_range(0,OS.window_size.y))
+	#		point = Vector2(400,220)
+			var space_state = get_world_2d().direct_space_state
+			var result = space_state.intersect_point(point, 2, [], 1, true, true)
+	#		print(result)
+			for part in result:
+				if part.collider == $SpawnArea:
+					print("PUSH")
+					spawn_canister(point)
+					print(canistersNum)
+					placed = true
+		else:
+			print("FULL!")
+#			print(point)
+#		placed = false
+	pass # Replace with function body.
+	
+func wormy_died():
+	playersNum -= 1

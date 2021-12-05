@@ -49,7 +49,7 @@ position = Vector2( 407.092, 228.879 )
 [node name="SpawnLocation" type="Node2D" parent="."]
 position = Vector2( 407.092, 379.952 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="GrowthCanTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="SpawnLantern" type="Light2D" parent="."]
@@ -83,8 +83,12 @@ polygon = PoolVector2Array( 25.3598, 22.6148, 781.648, 22.6148, 776.737, 733.477
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="EventDuration" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="GrowthCanTimer" to="." method="_on_GrowthCanTimer_timeout"]
 [connection signal="area_entered" from="SpawnLantern/SpawnPrevention" to="." method="_on_SpawnPrevention_area_entered"]
 [connection signal="area_exited" from="SpawnLantern/SpawnPrevention" to="." method="_on_SpawnPrevention_area_exited"]
 [connection signal="timeout" from="SpawnLanternTimer" to="." method="_on_SpawnLanternTimer_timeout"]
 [connection signal="timeout" from="SpawnAiTimer" to="." method="_on_SpawnAiTimer_timeout"]
+[connection signal="timeout" from="EventDuration" to="." method="_on_EventDuration_timeout"]
