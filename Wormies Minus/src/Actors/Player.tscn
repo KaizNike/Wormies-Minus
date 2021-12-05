@@ -38,7 +38,7 @@ collision_layer = 32
 collision_mask = 1056
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpawnPrevention"]
-polygon = PoolVector2Array( -1.05246, -0.295898, 78.0561, -28.084, 79.0575, 33.7508 )
+polygon = PoolVector2Array( -1.05246, -0.295898, 8.32386, -31.6247, 92.6237, -30.7838, 89.0499, 28.0789 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPrevention"]
 shape = SubResource( 2 )

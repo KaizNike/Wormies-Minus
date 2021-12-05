@@ -66,7 +66,7 @@ func grow():
 	scene_instance.color = color
 	scene_instance.followBody = followBodyFull.get_node("BodyLock")
 #	scene_instance.global_transform = followBodyFull.get_node("BodySpawn").global_transform
-	scene_instance.global_position = followBodyFull.get_node("BodyLock").global_position
+	scene_instance.position = followBodyFull.position
 #	scene_instance.position = followBodyFull.get_node("BodyLock").position
 #	scene_instance.position = followBodyFull.get_node("BodySpawn").position
 #	scene_instance.position = Vector2(OS.window_size.x/2, OS.window_size.y/2)

@@ -135,7 +135,7 @@ func _on_AIDetection_area_exited(area):
 	if ai_controlled:
 		if area == last_hazard:
 			var test = randf()
-			if test > 0.5:
+			if test > 0.1:
 				move = 0
 			else:
 				move = 1
