@@ -1,0 +1,33 @@
+[gd_scene format=2]
+
+[node name="ScoreUI" type="Control"]
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+margin_left = 293.0
+margin_right = 507.0
+margin_bottom = 54.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="CenterContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 207.0
+margin_bottom = 47.0
+
+[node name="TopLabel" type="Label" parent="CenterContainer/PanelContainer/VSplitContainer"]
+margin_right = 200.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 200, 0 )
+text = "High Score:  1"
+
+[node name="BestLabel" type="Label" parent="CenterContainer/PanelContainer/VSplitContainer"]
+margin_top = 26.0
+margin_right = 200.0
+margin_bottom = 40.0
+text = "Best Player: 1"
