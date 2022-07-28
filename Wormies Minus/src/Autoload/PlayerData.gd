@@ -1,6 +1,9 @@
 extends Node2D
 
 var numPlayers = 1
+var topScorerScore = 0
+var topScorerId = 0
+var highScore = 0
 
 # Declare member variables here. Examples:
 # var a: int = 2

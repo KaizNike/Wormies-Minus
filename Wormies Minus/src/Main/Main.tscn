@@ -31,3 +31,4 @@ wait_time = 64.0
 [connection signal="timeout" from="EventTimer" to="." method="_on_EventTimer_timeout"]
 
 [editable path="GameScene"]
+[editable path="ScoreUI"]

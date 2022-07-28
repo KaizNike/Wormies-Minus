@@ -11,7 +11,7 @@ var bodyLength = 0
 var id = 1
 var ai_controlled = false
 var first = false
-
+var score := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,6 +47,7 @@ func _ready():
 
 func die():
 	SoundsInd.get_node("Death").play()
+	score_change(-score)
 	var children = self.get_children()
 	var index = 0
 	for child in children:
@@ -62,6 +63,7 @@ func die():
 	
 func grow():
 	$Player.get_node("EatenSound").play()
+	score_change(100)
 	var scene_instance = BodyScene.instance()
 	scene_instance.id = button
 	scene_instance.color = color
@@ -79,6 +81,25 @@ func grow():
 	followBodyFull = lastBody
 	add_child(scene_instance)
 	bodyLength += 1
+
+func score_change(change):
+	var scoreTemp = score + change
+	if scoreTemp > PlayerData.topScorerScore or PlayerData.topScorerId == id:
+		PlayerData.topScorerScore = scoreTemp
+		var colorTemp = Color()
+		if scoreTemp == 0:
+			PlayerData.topScorerId = 0
+			colorTemp = ColorN("white")
+		else:
+			PlayerData.topScorerId = id
+			colorTemp = color
+		Globals.emit_signal("topScorerUpdate", scoreTemp, change, colorTemp)
+	if scoreTemp > PlayerData.highScore:
+		PlayerData.highScore = scoreTemp
+		Globals.emit_signal("highScoreUpdate", scoreTemp, change)
+		
+	score = scoreTemp
+
 
 func _on_PlayArea_body_exited(body: Node) -> void:
 	print(body)
