@@ -2,6 +2,8 @@ extends Node
 
 signal death_canister(pos)
 signal detect_death()
+signal highScoreUpdate(score, diff)
+signal topScorerUpdate(score, diff, color)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
