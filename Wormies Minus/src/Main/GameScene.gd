@@ -91,9 +91,10 @@ func _on_SpawnLanternTimer_timeout():
 
 
 func _on_SpawnAiTimer_timeout():
-	if playersNum > 0:
-		spawn_ai()
-		pass
+#	if playersNum > 0:
+#		spawn_ai()
+#		pass
+	spawn_ai()
 	pass # Replace with function body.
 
 
