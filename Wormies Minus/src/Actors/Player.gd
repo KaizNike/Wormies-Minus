@@ -35,7 +35,7 @@ func _ready() -> void:
 	$Polygons.modulate = color
 	ai_controlled = get_parent().ai_controlled
 	print(ai_controlled)
-	
+	pass
 	pass # Replace with function body.
 	
 #	var wait = randf()
@@ -109,6 +109,11 @@ func _input(event: InputEvent) -> void:
 #	if body == self:
 #		die()
 	pass # Replace with function body.
+	
+func change_name(Id):
+	if not ai_controlled:
+		$PanelContainer/Label.text = "Player: " + OS.get_scancode_string(button)
+		$PanelContainer.visible = true
 	
 func _timer_callback():
 	queue_free()

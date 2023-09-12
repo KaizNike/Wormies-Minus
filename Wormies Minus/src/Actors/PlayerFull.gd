@@ -17,6 +17,8 @@ var score := 0
 func _ready():
 	PlayerNode.button = button
 	id = button
+	if not ai_controlled:
+		PlayerNode.change_name(id)
 	color = PlayerNode.color
 	if segments == 0:
 		followBodyFull = PlayerNode

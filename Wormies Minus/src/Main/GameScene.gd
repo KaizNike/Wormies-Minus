@@ -8,8 +8,9 @@ var canistersNum = 0
 export (PackedScene) var PlayerScene
 export (PackedScene) var CanisterScene
 onready var pc = self.get_node("PlayerController")
-var spawner_disabled = false
+export var spawner_disabled := false
 var area_last
+export var point_to_move_to = Vector2.ZERO
 
 var placed = false
 var lightPlaced = false
@@ -78,12 +79,26 @@ func change_spawn_loc():
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_point(point, 32, [], 1, true, true)
 #		print(result)
+		var found_point = false
 		for part in result:
 			if part.collider == $SpawnArea:
-				print("PULL")
-				$SpawnLantern.position = point
-				lightPlaced = true
+				found_point = true
+#			if part.collider.is_in_group("spawnprev"):
+#				$SpawnLantern.visible = false
+#				spawner_disabled = true
+#				$SpawnLanternTimer.start()
+#				return
+		if found_point:
+			print("PULL Spawner")
+#			$SpawnLantern.position = point
+			point_to_move_to = point
+#			$SpawnLantern.visible = true
+			$SpawnLantern/SpawnAnimator.play("fadeout")
+			lightPlaced = true
 	pass
+
+func change_point():
+	$SpawnLantern.position = point_to_move_to
 
 func _on_SpawnLanternTimer_timeout():
 	change_spawn_loc()
@@ -151,6 +166,7 @@ func breeding_frenzy(duration, event):
 	Event = event
 	$EventDuration.wait_time = duration
 	$EventDuration.start()
+	spawner_disabled = false
 #	yield(get_tree().create_timer(duration),"timeout")
 #	$SpawnAiTimer.wait_time = 15
 
@@ -192,10 +208,18 @@ func _on_GrowthCanTimer_timeout():
 					print(canistersNum)
 					placed = true
 		else:
-			print("FULL!")
+			pass
+#			print("FULL!")
 #			print(point)
 #		placed = false
 	pass # Replace with function body.
 	
 func wormy_died():
 	playersNum -= 1
+
+
+func _on_SpawnLaternTimer_timeout():
+	$SpawnLantern.visible = true
+	spawner_disabled = false
+	change_spawn_loc()
+	pass # Replace with function body.
