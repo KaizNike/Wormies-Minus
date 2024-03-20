@@ -11,6 +11,8 @@ var ai_controlled = false
 var last_hazard
 var next_door_neighbor
 
+var invincible = false
+
 export (PackedScene) var BodyScene; var links = []; var links_img = []
 var pos_start = Vector2(0, 0); var size_body_link = 5; var num_links = 10; var dt = 15
  
@@ -128,7 +130,8 @@ func _on_DieSpot_body_entered(body):
 
 
 func natural_death():
-	queue_free()
+	if not invincible:
+		queue_free()
 
 
 func _on_AIDetection_area_entered(area):

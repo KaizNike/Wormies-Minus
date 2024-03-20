@@ -81,8 +81,10 @@ func grow():
 #	distance += 20
 	lastBody = scene_instance
 	followBodyFull = lastBody
+	$Player.invincible = true
 	add_child(scene_instance)
 	bodyLength += 1
+	$InvincibilityTimer.start()
 
 func score_change(change):
 	var scoreTemp = score + change
@@ -107,3 +109,8 @@ func _on_PlayArea_body_exited(body: Node) -> void:
 	print(body)
 	if body == PlayerNode:
 		die()
+
+
+func _on_InvincibilityTimer_timeout():
+	$Player.invincible = false
+	pass # Replace with function body.

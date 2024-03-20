@@ -2,6 +2,7 @@ extends Node2D
 
 var Event = "none"
 var players = []
+var player = {"scancode": 0, "node": Node2D}
 var ais = []
 var playersNum = 0
 var canistersNum = 0
@@ -30,15 +31,23 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	var removeIndx = null
 	if event is InputEventKey:
-		for code in players:
-			if code == event.scancode:
-				return
+		var count = 0
+		for worm in players:
+			if worm.scancode == event.scancode:
+				if has_node(worm.node):
+					return
+				else:
+					removeIndx = count
+			count += 1
 				
 		if spawner_disabled:
 			return
 		
-		players.append(event.scancode)
+		if removeIndx:
+			players.remove(removeIndx)
+#		players.append(event.scancode)
 		var scene_instance = PlayerScene.instance()
 		if first == false:
 			first = true
@@ -53,9 +62,15 @@ func _input(event: InputEvent) -> void:
 		scene_instance.position = $SpawnLantern.position
 		scene_instance.button = event.scancode
 		$PlayArea.connect("body_exited", scene_instance, "_on_PlayArea_body_exited")
+		
 		add_child(scene_instance)
 		spawn_rand(scene_instance)
+		var new_worm = player.duplicate(true)
+		new_worm.scancode = event.scancode
+		new_worm.node = scene_instance.get_path()
+		players.append(new_worm)
 		print(event.scancode)
+		print(players)
 	if event.is_action_pressed("spawn_enemy"):
 		spawn_ai()
 
