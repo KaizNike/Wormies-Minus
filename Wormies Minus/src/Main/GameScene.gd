@@ -237,4 +237,185 @@ func _on_SpawnLaternTimer_timeout():
 	$SpawnLantern.visible = true
 	spawner_disabled = false
 	change_spawn_loc()
+	pass # Replace with function body..
+
+
+func _on_P1Button_pressed():
+	var removeIndx = null
+	var count = 0
+	for worm in players:
+		if worm.scancode == -1:
+			if has_node(worm.node):
+				get_node(worm.node).change_movement()
+				return
+			else:
+				removeIndx = count
+		count += 1
+			
+	if spawner_disabled:
+		return
+	
+	if removeIndx:
+		players.remove(removeIndx)
+#		players.append(event.scancode)
+	var scene_instance = PlayerScene.instance()
+	if first == false:
+		first = true
+		get_parent().game_start()
+		$AudioStreamPlayer.play()
+		get_parent().get_node("UI").visible = false
+#			$Control.visible = false
+		scene_instance.first = true
+	playersNum += 1
+#		scene_instance.position = OS.get_window_size() / 2
+#		scene_instance.position = $SpawnLocation.position
+	scene_instance.position = $SpawnLantern.position
+	scene_instance.button = null
+	scene_instance.specialPlayer = -1
+	scene_instance.get_node("Player").color = Color("#ff2a00")
+	$PlayArea.connect("body_exited", scene_instance, "_on_PlayArea_body_exited")
+	
+	add_child(scene_instance)
+	spawn_rand(scene_instance)
+	var new_worm = player.duplicate(true)
+	new_worm.scancode = -1
+	new_worm.node = scene_instance.get_path()
+	players.append(new_worm)
+	print(-1)
+	print(players)
+
+
+func _on_P2Button_pressed():
+	var removeIndx = null
+	var count = 0
+	for worm in players:
+		if worm.scancode == -2:
+			if has_node(worm.node):
+				get_node(worm.node).change_movement()
+				return
+			else:
+				removeIndx = count
+		count += 1
+			
+	if spawner_disabled:
+		return
+	
+	if removeIndx:
+		players.remove(removeIndx)
+#		players.append(event.scancode)
+	var scene_instance = PlayerScene.instance()
+	if first == false:
+		first = true
+		get_parent().game_start()
+		$AudioStreamPlayer.play()
+		get_parent().get_node("UI").visible = false
+#			$Control.visible = false
+		scene_instance.first = true
+	playersNum += 1
+#		scene_instance.position = OS.get_window_size() / 2
+#		scene_instance.position = $SpawnLocation.position
+	scene_instance.position = $SpawnLantern.position
+	scene_instance.button = null
+	scene_instance.specialPlayer = -2
+	scene_instance.get_node("Player").color = Color("#00ff2e")
+	$PlayArea.connect("body_exited", scene_instance, "_on_PlayArea_body_exited")
+	
+	add_child(scene_instance)
+	spawn_rand(scene_instance)
+	var new_worm = player.duplicate(true)
+	new_worm.scancode = -2
+	new_worm.node = scene_instance.get_path()
+	players.append(new_worm)
+	print(-2)
+	print(players)
 	pass # Replace with function body.
+
+
+func _on_P3Button_pressed():
+	var removeIndx = null
+	var count = 0
+	for worm in players:
+		if worm.scancode == -3:
+			if has_node(worm.node):
+				get_node(worm.node).change_movement()
+				return
+			else:
+				removeIndx = count
+		count += 1
+			
+	if spawner_disabled:
+		return
+	
+	if removeIndx:
+		players.remove(removeIndx)
+#		players.append(event.scancode)
+	var scene_instance = PlayerScene.instance()
+	if first == false:
+		first = true
+		get_parent().game_start()
+		$AudioStreamPlayer.play()
+		get_parent().get_node("UI").visible = false
+#			$Control.visible = false
+		scene_instance.first = true
+	playersNum += 1
+#		scene_instance.position = OS.get_window_size() / 2
+#		scene_instance.position = $SpawnLocation.position
+	scene_instance.position = $SpawnLantern.position
+	scene_instance.button = null
+	scene_instance.specialPlayer = -3
+	scene_instance.get_node("Player").color = Color("#1400ff")
+	$PlayArea.connect("body_exited", scene_instance, "_on_PlayArea_body_exited")
+	
+	add_child(scene_instance)
+	spawn_rand(scene_instance)
+	var new_worm = player.duplicate(true)
+	new_worm.scancode = -3
+	new_worm.node = scene_instance.get_path()
+	players.append(new_worm)
+	print(-3)
+	print(players)
+
+
+func _on_P4Button_pressed():
+	var removeIndx = null
+	var count = 0
+	for worm in players:
+		if worm.scancode == -4:
+			if has_node(worm.node):
+				get_node(worm.node).change_movement()
+				return
+			else:
+				removeIndx = count
+		count += 1
+			
+	if spawner_disabled:
+		return
+	
+	if removeIndx:
+		players.remove(removeIndx)
+#		players.append(event.scancode)
+	var scene_instance = PlayerScene.instance()
+	if first == false:
+		first = true
+		get_parent().game_start()
+		$AudioStreamPlayer.play()
+		get_parent().get_node("UI").visible = false
+#			$Control.visible = false
+		scene_instance.first = true
+	playersNum += 1
+#		scene_instance.position = OS.get_window_size() / 2
+#		scene_instance.position = $SpawnLocation.position
+	scene_instance.position = $SpawnLantern.position
+	scene_instance.button = null
+	scene_instance.specialPlayer = -4
+	scene_instance.get_node("Player").color = Color("#161700")
+	$PlayArea.connect("body_exited", scene_instance, "_on_PlayArea_body_exited")
+	
+	add_child(scene_instance)
+	spawn_rand(scene_instance)
+	var new_worm = player.duplicate(true)
+	new_worm.scancode = -4
+	new_worm.node = scene_instance.get_path()
+	players.append(new_worm)
+	print(-4)
+	print(players)

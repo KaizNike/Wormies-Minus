@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Main/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Main/GameScene.tscn" type="PackedScene" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://src/Main/Main.gd" type="Script" id=4]
 [ext_resource path="res://Assets/feedingtime.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/Main/ScoreUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/PlayerBody.png" type="Texture" id=7]
+[ext_resource path="res://src/Main/PivotPointP1.gd" type="Script" id=8]
+[ext_resource path="res://src/Main/PivotPointP2.gd" type="Script" id=9]
+[ext_resource path="res://src/Main/PivotPointP3.gd" type="Script" id=10]
+[ext_resource path="res://src/Main/PivotPointP4.gd" type="Script" id=11]
+[ext_resource path="res://Assets/PlayerHead.png" type="Texture" id=12]
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
@@ -27,8 +33,185 @@ wait_time = 64.0
 
 [node name="ScoreUI" parent="." instance=ExtResource( 6 )]
 
+[node name="Touch" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Touch"]
+margin_right = 40.0
+margin_bottom = 40.0
+dragger_visibility = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Touch/VSplitContainer"]
+margin_right = 125.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="PivotPoint" type="Control" parent="Touch/VSplitContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 118.0
+margin_bottom = 118.0
+rect_pivot_offset = Vector2( 55, 55 )
+script = ExtResource( 8 )
+
+[node name="P1Button" type="TextureButton" parent="Touch/VSplitContainer/PanelContainer/PivotPoint"]
+self_modulate = Color( 1, 0.164706, 0, 1 )
+margin_right = 112.5
+margin_bottom = 112.5
+rect_min_size = Vector2( 112.5, 112.5 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="Touch/VSplitContainer"]
+margin_top = 125.0
+margin_right = 125.0
+margin_bottom = 139.0
+text = "Press me!"
+align = 1
+
+[node name="Touch2" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -125.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Touch2"]
+margin_right = 40.0
+margin_bottom = 40.0
+collapsed = true
+dragger_visibility = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Touch2/VSplitContainer"]
+margin_right = 125.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="PivotPointP2" type="Control" parent="Touch2/VSplitContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 118.0
+margin_bottom = 118.0
+rect_pivot_offset = Vector2( 55, 55 )
+script = ExtResource( 9 )
+
+[node name="P2Button" type="TextureButton" parent="Touch2/VSplitContainer/PanelContainer/PivotPointP2"]
+self_modulate = Color( 0, 1, 0.180392, 1 )
+margin_right = 112.5
+margin_bottom = 112.5
+rect_min_size = Vector2( 112.5, 112.5 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="Touch2/VSplitContainer"]
+margin_top = 125.0
+margin_right = 125.0
+margin_bottom = 139.0
+text = "P2 Ready!"
+align = 1
+
+[node name="Touch3" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -125.0
+margin_right = 125.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Touch3"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -151.0
+margin_right = 125.0
+collapsed = true
+dragger_visibility = 2
+
+[node name="Label" type="Label" parent="Touch3/VSplitContainer"]
+margin_right = 125.0
+margin_bottom = 14.0
+text = "I hunger."
+align = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Touch3/VSplitContainer"]
+margin_top = 14.0
+margin_right = 125.0
+margin_bottom = 151.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="PivotPointP3" type="Control" parent="Touch3/VSplitContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 118.0
+margin_bottom = 130.0
+rect_pivot_offset = Vector2( 55, 55 )
+script = ExtResource( 10 )
+
+[node name="P3Button" type="TextureButton" parent="Touch3/VSplitContainer/PanelContainer/PivotPointP3"]
+self_modulate = Color( 0.0784314, 0, 1, 1 )
+margin_right = 112.5
+margin_bottom = 112.5
+rect_min_size = Vector2( 112.5, 112.5 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
+[node name="Touch4" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -125.0
+margin_top = -125.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Touch4"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -125.0
+margin_top = -151.0
+collapsed = true
+dragger_visibility = 2
+
+[node name="Label" type="Label" parent="Touch4/VSplitContainer"]
+margin_right = 125.0
+margin_bottom = 14.0
+text = "Darkness above."
+align = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Touch4/VSplitContainer"]
+margin_top = 14.0
+margin_right = 125.0
+margin_bottom = 151.0
+rect_min_size = Vector2( 125, 125 )
+
+[node name="PivotPointP4" type="Control" parent="Touch4/VSplitContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 118.0
+margin_bottom = 130.0
+rect_pivot_offset = Vector2( 55, 55 )
+script = ExtResource( 11 )
+
+[node name="P4Button" type="TextureButton" parent="Touch4/VSplitContainer/PanelContainer/PivotPointP4"]
+self_modulate = Color( 0.0862745, 0.0901961, 0, 1 )
+margin_right = 112.5
+margin_bottom = 112.5
+rect_min_size = Vector2( 112.5, 112.5 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
 [connection signal="timeout" from="GameScene/EventDuration" to="." method="_on_EventDuration_timeout"]
 [connection signal="timeout" from="EventTimer" to="." method="_on_EventTimer_timeout"]
+[connection signal="pressed" from="Touch/VSplitContainer/PanelContainer/PivotPoint/P1Button" to="GameScene" method="_on_P1Button_pressed"]
+[connection signal="pressed" from="Touch2/VSplitContainer/PanelContainer/PivotPointP2/P2Button" to="GameScene" method="_on_P2Button_pressed"]
+[connection signal="pressed" from="Touch3/VSplitContainer/PanelContainer/PivotPointP3/P3Button" to="GameScene" method="_on_P3Button_pressed"]
+[connection signal="pressed" from="Touch4/VSplitContainer/PanelContainer/PivotPointP4/P4Button" to="GameScene" method="_on_P4Button_pressed"]
 
 [editable path="GameScene"]
 [editable path="ScoreUI"]

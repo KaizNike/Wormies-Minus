@@ -28,10 +28,13 @@ var angle = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var a = randf()
-	var b = randf()
-	var c = randf()
-	color = Color(a, b, c, 1)
+	if get_parent().specialPlayer < 0:
+		pass
+	else:
+		var a = randf()
+		var b = randf()
+		var c = randf()
+		color = Color(a, b, c, 1)
 	var PlayerSprite = get_node("PlayerSprite")
 	PlayerSprite.self_modulate = color
 	$Polygons.modulate = color
@@ -113,8 +116,13 @@ func _input(event: InputEvent) -> void:
 	pass # Replace with function body.
 	
 func change_name(Id):
+	var Str = ""
 	if not ai_controlled:
-		$PanelContainer/Label.text = "Player: " + OS.get_scancode_string(button)
+		if button:
+			Str = OS.get_scancode_string(button)
+		else:
+			Str = get_parent().specialPlayer
+		$PanelContainer/Label.text = "Player: " + str(Str)
 		$PanelContainer.visible = true
 	
 func _timer_callback():

@@ -9,6 +9,7 @@ var distance = 20
 var button
 var bodyLength = 0
 var id = 1
+var specialPlayer = 0
 var ai_controlled = false
 var first = false
 var score := 0
@@ -103,6 +104,12 @@ func score_change(change):
 		Globals.emit_signal("highScoreUpdate", scoreTemp, change)
 		
 	score = scoreTemp
+
+func change_movement():
+	if $Player.move == 1:
+		$Player.move = 0
+	elif $Player.move == 0:
+		$Player.move = 1
 
 
 func _on_PlayArea_body_exited(body: Node) -> void:
