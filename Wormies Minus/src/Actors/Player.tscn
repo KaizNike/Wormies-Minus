@@ -104,3 +104,4 @@ text = "HI!"
 [connection signal="area_exited" from="AIDetection" to="." method="_on_AIDetection_area_exited"]
 [connection signal="body_entered" from="DieSpot" to="." method="_on_DieSpot_body_entered"]
 [connection signal="area_entered" from="GoodieDetection" to="." method="_on_GoodieDetection_area_entered"]
+[connection signal="area_exited" from="GoodieDetection" to="." method="_on_GoodieDetection_area_exited"]

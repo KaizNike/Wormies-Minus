@@ -158,11 +158,22 @@ func _on_AIDetection_area_exited(area):
 				move = 0
 			else:
 				move = 1
+			last_hazard = null
 	pass # Replace with function body.
 
 
 func _on_GoodieDetection_area_entered(area):
 	if ai_controlled:
-		if area.is_in_group("goodie"):
+		if area.is_in_group("hazard"):
+			move = 1
+			last_hazard = area
+		if area.is_in_group("goodie") and not last_hazard:
 			move = 0
+	pass # Replace with function body.
+
+
+func _on_GoodieDetection_area_exited(area):
+	if ai_controlled:
+		if area.is_in_group("hazard"):
+			last_hazard = null
 	pass # Replace with function body.
